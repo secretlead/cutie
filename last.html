@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Our Memories</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background-color: #e6f0ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 40px 20px;
+    }
+
+    .container {
+      background-color: #001f3f;
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      color: white;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .title {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #66b3ff;
+    }
+
+    .polaroid {
+      background-color: white;
+      padding: 10px;
+      border-radius: 10px;
+      margin: 10px auto;
+      width: 150px;
+      box-shadow: 2px 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .polaroid img {
+      width: 100%;
+      border-radius: 5px;
+    }
+
+    .back-btn, .footer-btn {
+      background-color: #66b3ff;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 15px;
+      margin: 5px;
+      font-size: 14px;
+      color: #001f3f;
+      cursor: pointer;
+    }
+
+    .counter {
+      margin-top: 40px;
+    }
+
+    .counter h3 {
+      color: #66b3ff;
+      margin-bottom: 20px;
+    }
+
+    .counter-box {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .box {
+      background-color: #003366;
+      color: white;
+      border-radius: 10px;
+      padding: 15px 20px;
+      min-width: 100px;
+    }
+
+    .box .num {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .box .label {
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="title">OUR MEMORIES</div>
+  <img src="lesbi.png" width="415" alt="camera">
+
+  <a href="index.html">
+  <button class="back-btn">← Back</button>
+  </a>
+  <div class="counter" id="counter-section">
+    <h3>We’ve been together for…</h3>
+    <div class="counter-box">
+      <div class="box">
+        <div class="num" id="days">0</div>
+        <div class="label">Days</div>
+      </div>
+      <div class="box">
+        <div class="num" id="hours">0</div>
+        <div class="label">Hours</div>
+      </div>
+      <div class="box">
+        <div class="num" id="minutes">0</div>
+        <div class="label">Minutes</div>
+      </div>
+      <div class="box">
+        <div class="num" id="seconds">0</div>
+        <div class="label">Seconds</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Angka akhir:
+  const finalNumbers = {
+    days: 120,
+    hours: 2880,
+    minutes: 172800,
+    seconds: 10368000
+  };
+
+  let animated = false;
+
+  function animateValue(id, end) {
+    const obj = document.getElementById(id);
+    let start = 0;
+    const duration = 1500;
+    const increment = Math.ceil(end / (duration / 30));
+    const step = () => {
+      start += increment;
+      if (start >= end) {
+        obj.innerText = end.toLocaleString();
+        clearInterval(timer);
+      } else {
+        obj.innerText = start.toLocaleString();
+      }
+    };
+    const timer = setInterval(step, 30);
+  }
+
+  function startCount() {
+    if (!animated) {
+      animateValue("days", finalNumbers.days);
+      animateValue("hours", finalNumbers.hours);
+      animateValue("minutes", finalNumbers.minutes);
+      animateValue("seconds", finalNumbers.seconds);
+      animated = true;
+    }
+  }
+
+  // Trigger saat discroll ke counter section
+  window.addEventListener('scroll', () => {
+    const counterSection = document.getElementById('counter-section');
+    const top = counterSection.getBoundingClientRect().top;
+    const screenHeight = window.innerHeight;
+    if (top < screenHeight - 100) {
+      startCount();
+    }
+  });
+</script>
+
+</body>
+</html>

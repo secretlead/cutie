@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Popup Password</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .popup {
+      background-color: white;
+      border: 2px solid #001f3f;
+      border-radius: 10px;
+      padding: 20px;
+      width: 600px;
+      display: flex;
+      gap: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .image-container {
+      width: 300px;
+      height: 300px;
+      flex-shrink: 0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .right-panel {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .input-field {
+      width: 100%;
+      height: 50px;
+      font-size: 24px;
+      margin-bottom: 15px;
+      text-align: center;
+      border: 2px solid #001f3f;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      pointer-events: none;
+      letter-spacing: 5px;
+    }
+
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .button-grid button {
+      padding: 15px;
+      font-size: 20px;
+      border: none;
+      border-radius: 8px;
+      background-color: #001f3f;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .button-grid button:hover {
+      background-color: #003366;
+    }
+
+    .button-wide {
+      grid-column: span 2;
+    }
+  </style>
+</head>
+<body>
+  <div class="popup">
+    <div class="image-container">
+      <!-- Ganti URL gambar di bawah ini sesuai kebutuhan -->
+      <img src="Desain tanpa judul_20250423_202033_0000.png" alt="Gambar">
+    </div>
+    <div class="right-panel">
+      <input type="password" id="passwordInput" class="input-field" readonly>
+      <div class="button-grid">
+        <button onclick="addChar('1')">1</button>
+        <button onclick="addChar('2')">2</button>
+        <button onclick="addChar('3')">3</button>
+        <button onclick="addChar('4')">4</button>
+        <button onclick="addChar('5')">5</button>
+        <button onclick="addChar('6')">6</button>
+        <button onclick="addChar('7')">7</button>
+        <button onclick="addChar('8')">8</button>
+        <button onclick="addChar('9')">9</button>
+        <button onclick="deleteChar()">⌫</button>
+        <button onclick="addChar('0')">0</button>
+        <button onclick="submitPassword()">=</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let input = '';
+
+    function addChar(char) {
+      input += char;
+      document.getElementById('passwordInput').value = '*'.repeat(input.length);
+    }
+
+    function deleteChar() {
+      input = input.slice(0, -1);
+      document.getElementById('passwordInput').value = '*'.repeat(input.length);
+    }
+
+    function submitPassword() {
+      window.location.href = 'nextpage.html';
+    }
+  </script>
+</body>
+</html>
